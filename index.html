@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Timers in JS</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+        }
+
+        .timer-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 3;
+            padding-block-start: 40vh;
+            inline-size: 100vw;
+        }
+
+
+        h1 {
+            position: absolute;
+            inset-inline-start: 50%;
+            padding-block-start: 40px;
+            translate: -50% 0;
+            z-index: 2;
+            display: block;
+            color: white;
+            mix-blend-mode: difference;
+        }
+
+        .black-container {
+            position: absolute;
+            inline-size: 50vw;
+            padding-block-start: 40vh;
+            background-color: black;
+            block-size: 100vh;
+            margin: auto;
+        }
+
+        .white-container {
+            position: absolute;
+            padding-block-start: 40vh;
+            inline-size: 50vw;
+            background-color: white;
+            block-size: 100vh;
+            margin: auto;
+            inset-inline-start: 50%;
+        }
+
+        #white_timer {
+            filter: invert(1);
+        }
+
+        #black_timer {
+            filter: contrast(1.4);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Chess Timers in JS</h1>
+    <div class="black-container"></div>
+    <div class="white-container"></div>
+    <div class="timer-wrapper">
+        <div id="white_timer" class="white_timer"></div>
+        <div id="black_timer" class="black_timer"></div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"></script>
+    <script src="./script.js"></script>
+</body>
+
+</html>
