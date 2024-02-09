@@ -40,10 +40,14 @@ $(document).ready(() => {
     },
   });
 
+  const tickSound = document.getElementById("tickSound");
   let isWhite = getIsWhite();
 
   $(document).on("keydown", (event) => {
     if (event.key === " ") {
+      tickSound.currentTime = 0;
+      tickSound.src = "./sound.wav";
+      tickSound.play();
       isWhite = !isWhite;
       // Check if space bar is pressed
       if (isWhite) {
@@ -64,6 +68,8 @@ $(document).ready(() => {
       localStorage.removeItem("timerValue_black"); // Clear stored value when resetting
       localStorage.setItem("isWhite", JSON.stringify(false)); // Set isWhite to false in local storage
       isWhite = false; // Reset isWhite to false
+    } else if (event.key === "Shift" || event.key === "p") {
+      window.location.reload();
     }
   });
 });
