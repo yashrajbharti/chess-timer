@@ -18,6 +18,7 @@
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
             text-align: center;
+            overflow: hidden;
         }
 
         .timer-wrapper {
@@ -122,14 +123,30 @@
             justify-content: space-between;
         }
 
-        .black_timer.active_timer::after {
-            content: "active";
+        :is(.black_timer, .white_timer).active_timer::after {
+            content: url("./arrow.svg");
+            inset-block-start: -100%;
+            translate: 0 -50%;
+            scale: 0.5;
+            transform-origin: center;
             position: absolute;
+            animation: hovering 1s ease-in-out infinite both;
         }
 
-        .white_timer.active_timer::after {
-            content: "active";
-            position: absolute;
+        @keyframes hovering {
+            0% {
+                inset-block-start: -100%;
+
+            }
+
+            50% {
+                inset-block-start: -150%;
+
+            }
+
+            100% {
+                inset-block-start: -100%;
+            }
         }
     </style>
 </head>

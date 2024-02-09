@@ -2,7 +2,7 @@ $(document).ready(() => {
   // Function to get the current timer value from local storage
   const getSavedTime = (clockId) => {
     const savedTime = localStorage.getItem(`timerValue_${clockId}`);
-    return savedTime ? parseInt(savedTime) : 6; // Default to 10 minutes if no value is found
+    return savedTime ? parseInt(savedTime) : 600; // Default to 10 minutes if no value is found
   };
 
   // Function to get the current state of isWhite from local storage
@@ -87,9 +87,9 @@ $(document).ready(() => {
     } else if (event.key === "Enter") {
       // Check if the Enter key is pressed
       // Reset both FlipClocks to the initial time (10 minutes)
-      whiteClock.setTime(6);
+      whiteClock.setTime(600);
       whiteClock.stop();
-      blackClock.setTime(6);
+      blackClock.setTime(600);
       blackClock.stop();
       modal.style.display = "none";
       localStorage.removeItem("timerValue_white"); // Clear stored value when resetting
@@ -102,8 +102,8 @@ $(document).ready(() => {
   });
   restart.addEventListener("click", () => {
     modal.style.display = "none";
-    whiteClock.setTime(6);
-    blackClock.setTime(6);
+    whiteClock.setTime(600);
+    blackClock.setTime(600);
     localStorage.removeItem("timerValue_white"); // Clear stored value when resetting
     localStorage.removeItem("timerValue_black"); // Clear stored value when resetting
     localStorage.setItem("isWhite", JSON.stringify(false)); // Set isWhite to false in local storage
