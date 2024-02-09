@@ -2,7 +2,7 @@ $(document).ready(() => {
   // Function to get the current timer value from local storage
   const getSavedTime = (clockId) => {
     const savedTime = localStorage.getItem(`timerValue_${clockId}`);
-    return savedTime ? parseInt(savedTime) : 600; // Default to 10 minutes if no value is found
+    return savedTime ? parseInt(savedTime) : 6; // Default to 10 minutes if no value is found
   };
 
   // Function to get the current state of isWhite from local storage
@@ -13,6 +13,8 @@ $(document).ready(() => {
 
   const modal = document.querySelector(".modal");
   const restart = document.querySelector(".btn");
+  const white_timer = document.getElementById("white_timer");
+  const black_timer = document.getElementById("black_timer");
 
   // Initialize FlipClock instances with the saved time
   const whiteClock = new FlipClock($("#white_timer"), getSavedTime("white"), {
@@ -25,7 +27,9 @@ $(document).ready(() => {
           blackClock.getTime().time === 0 &&
           whiteClock.getTime().time === 0
         ) {
-          modal.style.display = "inline-flex";
+          setTimeout(() => {
+            modal.style.display = "inline-flex";
+          }, 1000);
         }
       },
       interval: () => {
@@ -46,7 +50,9 @@ $(document).ready(() => {
           blackClock.getTime().time === 0 &&
           whiteClock.getTime().time === 0
         ) {
-          modal.style.display = "inline-flex";
+          setTimeout(() => {
+            modal.style.display = "inline-flex";
+          }, 1000);
         }
       },
       interval: () => {
@@ -69,17 +75,21 @@ $(document).ready(() => {
       // Check if space bar is pressed
       if (isWhite) {
         whiteClock.stop();
+        white_timer?.classList?.remove("active_timer");
         blackClock.start();
+        black_timer.classList.add("active_timer");
       } else {
         blackClock.stop();
+        black_timer?.classList?.remove("active_timer");
         whiteClock.start();
+        white_timer.classList.add("active_timer");
       }
     } else if (event.key === "Enter") {
       // Check if the Enter key is pressed
       // Reset both FlipClocks to the initial time (10 minutes)
-      whiteClock.setTime(600);
+      whiteClock.setTime(6);
       whiteClock.stop();
-      blackClock.setTime(600);
+      blackClock.setTime(6);
       blackClock.stop();
       modal.style.display = "none";
       localStorage.removeItem("timerValue_white"); // Clear stored value when resetting
@@ -92,8 +102,8 @@ $(document).ready(() => {
   });
   restart.addEventListener("click", () => {
     modal.style.display = "none";
-    whiteClock.setTime(600);
-    blackClock.setTime(600);
+    whiteClock.setTime(6);
+    blackClock.setTime(6);
     localStorage.removeItem("timerValue_white"); // Clear stored value when resetting
     localStorage.removeItem("timerValue_black"); // Clear stored value when resetting
     localStorage.setItem("isWhite", JSON.stringify(false)); // Set isWhite to false in local storage
