@@ -23,12 +23,14 @@ $(document).ready(() => {
     countdown: true,
     callbacks: {
       stop: () => {
-        if (
-          blackClock.getTime().time === 0 &&
-          whiteClock.getTime().time === 0
-        ) {
+        if (whiteClock.getTime().time === 0) {
           setTimeout(() => {
             modal.style.display = "inline-flex";
+            let br = document.createElement("br");
+            modal.querySelector(".message").appendChild(br);
+            let span = document.createElement("span");
+            span.textContent = "timer on LEFT ended to 0";
+            modal.querySelector(".message").appendChild(span);
           }, 1000);
         }
       },
@@ -46,12 +48,14 @@ $(document).ready(() => {
     countdown: true,
     callbacks: {
       stop: () => {
-        if (
-          blackClock.getTime().time === 0 &&
-          whiteClock.getTime().time === 0
-        ) {
+        if (blackClock.getTime().time === 0) {
           setTimeout(() => {
             modal.style.display = "inline-flex";
+            let br = document.createElement("br");
+            modal.querySelector(".message").appendChild(br);
+            let span = document.createElement("span");
+            span.textContent = "timer on RIGHT ended to 0";
+            modal.querySelector(".message").appendChild(span);
           }, 1000);
         }
       },
