@@ -11,13 +11,23 @@ $(document).ready(() => {
     return savedIsWhite ? JSON.parse(savedIsWhite) : false; // Default to false if no value is found
   };
 
+  const modal = document.querySelector(".modal");
+  const restart = document.querySelector(".btn");
+
   // Initialize FlipClock instances with the saved time
   const whiteClock = new FlipClock($("#white_timer"), getSavedTime("white"), {
     clockFace: "MinuteCounter",
     autoStart: false,
     countdown: true,
     callbacks: {
-      stop: () => {},
+      stop: () => {
+        if (
+          blackClock.getTime().time === 0 &&
+          whiteClock.getTime().time === 0
+        ) {
+          modal.style.display = "inline-flex";
+        }
+      },
       interval: () => {
         // Save the current timer value to local storage every second
         localStorage.setItem("timerValue_white", whiteClock.getTime().time);
@@ -31,7 +41,14 @@ $(document).ready(() => {
     autoStart: false,
     countdown: true,
     callbacks: {
-      stop: () => {},
+      stop: () => {
+        if (
+          blackClock.getTime().time === 0 &&
+          whiteClock.getTime().time === 0
+        ) {
+          modal.style.display = "inline-flex";
+        }
+      },
       interval: () => {
         // Save the current timer value to local storage every second
         localStorage.setItem("timerValue_black", blackClock.getTime().time);
@@ -60,10 +77,11 @@ $(document).ready(() => {
     } else if (event.key === "Enter") {
       // Check if the Enter key is pressed
       // Reset both FlipClocks to the initial time (10 minutes)
-      whiteClock.stop();
-      blackClock.stop();
       whiteClock.setTime(600);
+      whiteClock.stop();
       blackClock.setTime(600);
+      blackClock.stop();
+      modal.style.display = "none";
       localStorage.removeItem("timerValue_white"); // Clear stored value when resetting
       localStorage.removeItem("timerValue_black"); // Clear stored value when resetting
       localStorage.setItem("isWhite", JSON.stringify(false)); // Set isWhite to false in local storage
@@ -71,5 +89,14 @@ $(document).ready(() => {
     } else if (event.key === "Shift" || event.key === "p") {
       window.location.reload();
     }
+  });
+  restart.addEventListener("click", () => {
+    modal.style.display = "none";
+    whiteClock.setTime(600);
+    blackClock.setTime(600);
+    localStorage.removeItem("timerValue_white"); // Clear stored value when resetting
+    localStorage.removeItem("timerValue_black"); // Clear stored value when resetting
+    localStorage.setItem("isWhite", JSON.stringify(false)); // Set isWhite to false in local storage
+    isWhite = false; // Reset isWhite to false
   });
 });
