@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess Timers in JS</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="shortcut icon" href="favicon.png" type="image/png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .timer-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 3;
+            padding-block-start: 40vh;
+            inline-size: 100vw;
+        }
+
+
+        h1 {
+            position: absolute;
+            inset-inline-start: 50%;
+            padding-block-start: 40px;
+            translate: -50% 0;
+            z-index: 2;
+            display: block;
+            color: white;
+            mix-blend-mode: difference;
+        }
+
+        .black-container {
+            position: absolute;
+            inline-size: 50vw;
+            padding-block-start: 40vh;
+            background-color: black;
+            block-size: 100vh;
+            margin: auto;
+        }
+
+        .white-container {
+            position: absolute;
+            padding-block-start: 40vh;
+            inline-size: 50vw;
+            background-color: white;
+            block-size: 100vh;
+            margin: auto;
+            inset-inline-start: 50%;
+        }
+
+        #white_timer {
+            filter: invert(1);
+        }
+
+        #black_timer {
+            filter: contrast(1.4);
+        }
+
+        .modal {
+            position: absolute;
+            inset-inline-start: 50%;
+            inset-block-start: 50%;
+            translate: -50% -50%;
+            inline-size: auto;
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1.6rem 3rem;
+            border: 3px solid black;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .message {
+            font-size: 1.1rem;
+            margin-block-end: 1.6rem;
+            margin-block-start: 0;
+        }
+
+        .btn {
+            color: inherit;
+            font-family: inherit;
+            font-size: inherit;
+            background-color: white;
+            padding: 0.3rem 3.4rem;
+            border: 3px solid black;
+            margin-inline-end: 2.6rem;
+            box-shadow: 0 0 0 black;
+            transition: all 0.2s;
+        }
+
+        .btn:last-child {
+            margin: 0;
+        }
+
+        .btn:hover {
+            box-shadow: 0.4rem 0.4rem 0 black;
+            translate: -0.4rem -0.4rem;
+        }
+
+        .btn:active {
+            box-shadow: 0 0 0 black;
+            translate: 0 0;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        :is(.black_timer, .white_timer).active_timer::after {
+            content: url("./arrow.svg");
+            inset-block-start: -100%;
+            translate: 0 -50%;
+            scale: 0.5;
+            transform-origin: center;
+            position: absolute;
+            animation: hovering 1.5s ease-in-out infinite both;
+        }
+
+        @keyframes hovering {
+            0% {
+                inset-block-start: -100%;
+
+            }
+
+            50% {
+                inset-block-start: -150%;
+
+            }
+
+            100% {
+                inset-block-start: -100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Chess Timers in JS</h1>
+    <div class="black-container"></div>
+    <div class="white-container"></div>
+    <div class="timer-wrapper">
+        <div id="white_timer" class="white_timer"></div>
+        <div id="black_timer" class="black_timer"></div>
+    </div>
+    <audio id="tickSound">
+        <source src="" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+    <div class="modal" style="display: none;">
+        <p class="message">Looks like the match is over </p>
+        <div class="options">
+            <button class="btn">Restart Game</button>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flipclock/0.7.8/flipclock.min.js"></script>
+    <script src="./scriptBlitz.js"></script>
+</body>
+
+</html>
