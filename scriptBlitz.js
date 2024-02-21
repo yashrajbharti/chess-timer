@@ -85,13 +85,13 @@ $(document).ready(() => {
       // Check if space bar is pressed
       if (isWhite) {
         whiteClock.stop();
-        whiteClock.setTime(whiteClock.getTime().time + 10);
+        whiteClock.setTime(whiteClock.getTime().time + 5);
         white_timer?.classList?.remove("active_timer");
         blackClock.start();
         black_timer.classList.add("active_timer");
       } else {
         blackClock.stop();
-        blackClock.setTime(blackClock.getTime().time + 10);
+        blackClock.setTime(blackClock.getTime().time + 5);
         black_timer?.classList?.remove("active_timer");
         whiteClock.start();
         white_timer.classList.add("active_timer");
